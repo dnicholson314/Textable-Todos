@@ -1,31 +1,41 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech&display=swap" rel="stylesheet">
+
     <title>Document</title>
 </head>
 <body>
-    <h1>Tasks</h1>
+    <div class="app-container">
+        <h1>Textable Todos</h1>
 
-    <form method="POST" action="/">
-        {% csrf_token %}
-        {{form.title}}
-        <input type="submit" name="Create Task">
-    </form>
+        <form class="task-form" method="POST" action="/">
+            {% csrf_token %}
+            {{form.title}}
+            <input type="submit" name="Create Task">
+        </form>
 
-    {% for task in tasks %}
-        <div>
-            <a href="{% url 'update_task' task.id%}">Update task</a>
-            <a href="{% url 'delete_task' task.id%}">Delete task</a>
-            <p>
-                {% if task.complete == True %}
-                    <s>{{task}}</s>
-                {% else %}
-                    {{task}}
-                {% endif %}
-            </p>
-        </div>
-    {% endfor %}
+        {% for task in tasks %}
+            <div class="task">
+                <p>
+                    {% if task.complete == True %}
+                        <s>{{task}}</s>
+                    {% else %}
+                        {{task}}
+                    {% endif %}
+                </p>
+                <a href="{% url 'update_task' task.id%}">Update</a>
+                <a href="{% url 'delete_task' task.id%}">Delete</a>
+            </div>
+        {% endfor %}
+    </div>
 </body>
 </html>

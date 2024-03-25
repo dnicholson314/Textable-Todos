@@ -1,0 +1,79 @@
+* {
+    color-scheme: dark;
+    font-family: "Share Tech", sans-serif;
+}
+
+body {
+    background-color: #28231C;
+    margin: 0px;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.app-container h1 {
+    font-size: 3rem;
+    margin: 0px;
+}
+
+.task-form, .task {
+    width: 100%;
+    max-width: 600px;
+}
+
+.task-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.task-form input, .task a {
+    height: 40px;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #655356;
+    border: 2px solid #070707;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.task-form input[type="text"] {
+    flex: 90;
+}
+
+.task-form input[type="submit"] {
+    flex: 10;
+    font-size: 1rem;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.task a {
+    flex: 10;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+
+.task p {
+    flex: 80;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 10px;
+    background-color: #F1DEDE;
+    color: #070707;
+    border: 2px solid #070707;
+    border-radius: 3px;
+}
