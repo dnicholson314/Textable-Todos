@@ -22,6 +22,7 @@ def update_task(request, pk):
 
     if request.method == "POST":
         form = forms.TaskForm(request.POST, instance=task)
+
         if form.is_valid():
             form.save()
             return redirect('/')

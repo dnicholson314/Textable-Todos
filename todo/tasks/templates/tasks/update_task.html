@@ -16,6 +16,7 @@
     <form method="POST" action="">
         {% csrf_token %}
         {{ form.title }}
+        {{ form.description }}
         {{ form.complete }}
         <input type="submit" name="Update Task">
     </form>
