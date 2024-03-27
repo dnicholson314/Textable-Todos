@@ -1,41 +1,25 @@
-{% load static %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech&display=swap" rel="stylesheet">
+<form class="create-task-form" method="POST" action="/">
+    {% csrf_token %}
+    {{form.title}}
+    <input type="submit" name="Create Task" value="Create">
+</form>
 
-    <title>Document</title>
-</head>
-<body>
-    <div class="app-container">
-        <h1>Textable Todos</h1>
-
-        <form class="task-form" method="POST" action="/">
-            {% csrf_token %}
-            {{form.title}}
-            <input type="submit" name="Create Task">
-        </form>
-
-        {% for task in tasks %}
-            <div class="task">
-                <p>
-                    {% if task.complete == True %}
-                        <s>{{task}}</s>
-                    {% else %}
-                        {{task}}
-                    {% endif %}
-                </p>
-                <a href="{% url 'update_task' task.id%}">Update</a>
-                <a href="{% url 'delete_task' task.id%}">Delete</a>
-            </div>
-        {% endfor %}
+{% for task in tasks %}
+    <div class="task">
+        <p>
+            {% if task.complete == True %}
+                <s>{{task}}</s>
+            {% else %}
+                {{task}}
+            {% endif %}
+        </p>
+        <a href="{% url 'update_task' task.id%}">Update</a>
+        <a href="{% url 'delete_task' task.id%}">Delete</a>
     </div>
-</body>
-</html>
+{% endfor %}
+
+{% endblock %}

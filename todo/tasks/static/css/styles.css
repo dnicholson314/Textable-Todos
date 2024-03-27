@@ -21,39 +21,41 @@ body {
     margin: 0px;
 }
 
-.task-form, .task {
+.create-task-form {
+    display: flex;
     width: 100%;
     max-width: 600px;
-}
-
-.task-form {
-    width: 100%;
-    display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
 }
 
-.task-form input, .task a {
+.create-task-form input {
     height: 40px;
     box-sizing: border-box;
     padding: 10px;
-    background-color: #655356;
     border: 2px solid #070707;
     border-radius: 3px;
     cursor: pointer;
-}
-
-.task-form input[type="text"] {
-    flex: 90;
-}
-
-.task-form input[type="submit"] {
-    flex: 10;
     font-size: 1rem;
 }
 
+.create-task-form input[type="text"] {
+    flex: 90;
+    background-color: #655356;
+    color: white;
+}
+
+.create-task-form input[type="submit"] {
+    flex: 10;
+    font-size: 1rem;
+    background-color: #F1DEDE;
+    color: #070707;
+}
+
 .task {
+    width: 100%;
+    max-width: 600px;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -61,10 +63,18 @@ body {
 
 
 .task a {
+    height: 40px;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 10px;
     flex: 10;
+    background-color: #F1DEDE;
+    color: #070707;
+    border: 2px solid #070707;
+    border-radius: 3px;
     text-align: center;
-    color: white;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .task p {
@@ -72,8 +82,86 @@ body {
     box-sizing: border-box;
     margin: 0px;
     padding: 10px;
-    background-color: #F1DEDE;
-    color: #070707;
+    background-color: #655356;
+    color: white;
     border: 2px solid #070707;
     border-radius: 3px;
+}
+
+.update-task-form {
+    width: 100%;
+    max-width: 600px;
+}
+
+.update-task-form .form-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.update-task-form .form-row input[type="text"],
+.update-task-form .form-row input[type="submit"] {
+    height: 40px;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 2px solid #070707;
+    border-radius: 3px;
+    font-size: 1rem;
+}
+
+.update-task-form input[type="text"] {
+    flex: 80;
+    background-color: #655356;
+    color: white;
+}
+
+.update-task-form input[type="submit"] {
+    flex: 10;
+    font-size: 1rem;
+    background-color: #F1DEDE;
+    color: #070707;
+    cursor: pointer;
+}
+
+.update-task-form input[type="checkbox"] {
+    display: flex;
+    appearance: none;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    border: 2px solid #070707;
+    background-color: #F1DEDE;
+    border-radius: 3px;
+    cursor: pointer;
+}
+/* Thanks to https://stackblitz.com/edit/react-ts-ffdaqq?file=App.tsx for the clip path code*/
+.update-task-form input[type="checkbox"]::before {
+    content: "";
+    width: 30px;
+    height: 30px;
+    clip-path: polygon(17% 54%, 28% 43%, 38% 54%, 70% 22%, 81% 33%, 38% 75%, 17% 54%);
+    transform: scale(0);
+    background-color: #070707;
+}
+
+.update-task-form input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+.update-task-form textarea {
+    resize: none;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 2px solid #070707;
+    border-radius: 3px;
+    font-size: 1rem;
+    background-color: #655356;
+    color: white;
 }

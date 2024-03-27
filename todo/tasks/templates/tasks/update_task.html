@@ -1,24 +1,15 @@
-{% load static %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
-    <title>Document</title>
-</head>
-<body>
-    <h1>Update task</h1>
-
-    <form method="POST" action="">
-        {% csrf_token %}
+<form class="update-task-form" method="POST" action="">
+    {% csrf_token %}
+    <div class="form-row">
         {{ form.title }}
-        {{ form.description }}
         {{ form.complete }}
-        <input type="submit" name="Update Task">
-    </form>
-</body>
-</html>
+        <input type="submit" name="update-task" value="Update">
+    </div>
+    {{ form.description }}
+</form>
+
+{% endblock %}
