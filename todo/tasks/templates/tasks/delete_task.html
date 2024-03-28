@@ -1,23 +1,10 @@
-{% load static %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
-    <title>Document</title>
-</head>
-<body>
-    <h1>Are you sure you want to delete "{{task}}"?</h1>
-
+{% block content %}
+<form class="delete-task-form" method="POST" action="">
+    <div class="warning">Are you sure you want to delete "{{task}}"?</div>
     <a href="{% url 'list' %}">Cancel</a>
-
-    <form method="POST" action="">
         {% csrf_token %}
         <input type="submit" name="Confirm">
-    </form>
-</body>
-</html>
+</form>
+{% endblock %}
