@@ -8,13 +8,14 @@ Todo list
   * ~~Test whether deleting task works~~
   * ~~Test whether updating task (each field individually) works~~
 * ~~Style delete task page~~
-* Add login functionality
+* Add user authentication functionality
   * ~~Add login page~~
   * ~~Make sure users can log in and view their individual tasks~~
-  * Make sure users cannot view other users' tasks
-  * Write tests
+  * ~~Make sure users cannot view other users' tasks~~
+  * ~~Write tests~~
   * Add logout button
   * Style login page
   * Make sure if someone is already logged in they get redirected to the tasks page
+* Add account creation page
 * Add textable aspects
 * Dockerize and serve
