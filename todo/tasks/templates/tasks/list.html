@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form class="create-task-form" method="POST" action="/">
+<form class="create-task-form" method="POST" action="{% url 'list' %}">
     {% csrf_token %}
     {{form.title}}
     <input type="submit" name="Create Task" value="Create">
