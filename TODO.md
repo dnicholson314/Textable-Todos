@@ -15,7 +15,10 @@ Todo list
   * ~~Write tests~~
   * Add logout button
   * Style login page
-  * Make sure if someone is already logged in they get redirected to the tasks page
-* Add account creation page
+  * ~~Make sure if someone is already logged in they get redirected to the tasks page~~
+* ~~Add account creation page~~
+  * Write tests
+  * Link on login page
+  * Style account creation page
 * Add textable aspects
 * Dockerize and serve

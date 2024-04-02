@@ -2,7 +2,14 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from . import models, forms
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import login
 from django.http import HttpResponseForbidden
+
+class TaskLoginView(LoginView):
+    template_name = 'registration/login.html'
+    redirect_authenticated_user = True
 
 @login_required
 def index(request):
@@ -14,14 +21,31 @@ def index(request):
             task.save()
 
         return redirect(reverse('list'))
+    else:
+        tasks = models.Task.objects.filter(user=request.user)
+        form = forms.TaskForm
 
-    tasks = models.Task.objects.filter(user=request.user)
-    form = forms.TaskForm
     context = {
         'tasks': tasks,
         'form': form,
     }
     return render(request, 'tasks/list.html', context)
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('list')
+    else:
+        form = UserCreationForm()
+
+    context = {
+        'form': form
+    }
+    return render(request, 'registration/register.html', context)
+
 
 # pk comes from the url pattern
 @login_required
