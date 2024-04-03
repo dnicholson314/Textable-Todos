@@ -13,12 +13,14 @@ Todo list
   * ~~Make sure users can log in and view their individual tasks~~
   * ~~Make sure users cannot view other users' tasks~~
   * ~~Write tests~~
-  * Add logout button
+  * ~~Add logout button~~
   * Style login page
   * ~~Make sure if someone is already logged in they get redirected to the tasks page~~
 * ~~Add account creation page~~
   * Write tests
-  * Link on login page
+  * ~~Link on login page~~
   * Style account creation page
 * Add textable aspects
+* Replace update/delete buttons with icons (pencil for update, trashcan for delete)
+* Ensure everything is secure
 * Dockerize and serve
