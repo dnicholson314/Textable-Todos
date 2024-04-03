@@ -23,4 +23,5 @@ Todo list
 * Add textable aspects
 * Replace update/delete buttons with icons (pencil for update, trashcan for delete)
 * Ensure everything is secure
+  * Figure out how to make `ALLOWED_HOSTS` explicit
 * Dockerize and serve
