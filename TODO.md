@@ -24,7 +24,7 @@ Todo list
 * Replace update/delete buttons with icons (pencil for update, trashcan for delete)
 * Ensure everything is secure
   * Figure out how to make `ALLOWED_HOSTS` explicit
-* Dockerize and serve
-  * ~~Test a smaller app on fly.io~~
+* ~~Dockerize and serve~~
+  * ~~Test a smaller app on fly.io~
   * ~~Dockerize the app locally~~
   * ~~Deploy the app to fly.io~~
