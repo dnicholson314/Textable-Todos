@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form class="update-task-form" method="POST" action="">
+    {% csrf_token %}
+    <div class="form-row">
+        <button type="submit" name="update-task"><i class="fa-solid fa-paper-plane"></i></button>
+        {{ form.complete }}
+        {{ form.title }}
+    </div>
+    {{ form.description }}
+</form>
+
+{% endblock %}
