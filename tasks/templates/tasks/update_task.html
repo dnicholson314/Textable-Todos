@@ -5,9 +5,9 @@
 <form class="update-task-form" method="POST" action="">
     {% csrf_token %}
     <div class="form-row">
-        {{ form.title }}
+        <button type="submit" name="update-task"><i class="fa-solid fa-paper-plane"></i></button>
         {{ form.complete }}
-        <input type="submit" name="update-task" value="Update">
+        {{ form.title }}
     </div>
     {{ form.description }}
 </form>

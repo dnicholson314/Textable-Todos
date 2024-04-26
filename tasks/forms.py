@@ -7,6 +7,12 @@ class TaskForm(forms.ModelForm):
         model = models.Task
         exclude = ['user']
         widgets = {
-            'title': forms.TextInput(attrs={'placeholder': 'Enter task name'}),
-            'description': forms.Textarea(attrs={'placeholder': 'Enter task description'})
+            'title': forms.TextInput(attrs={
+                'placeholder': 'Enter task name',
+                'class': 'task-title-input',
+            }),
+            'description': forms.Textarea(attrs={
+                'placeholder': 'Enter task description',
+                'class': 'task-description-input'
+            }),
         }

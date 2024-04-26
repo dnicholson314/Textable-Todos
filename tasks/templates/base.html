@@ -6,7 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}Textable Todos{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'icon.png' %}"> 
+
+    <title>{% block title %}textable todos.{% endblock %}</title>
 
     {% block extrahead %}{% endblock %}
 
@@ -14,10 +16,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/192c7d57fa.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="app-container">
-        <h1>Textable Todos</h1>
+        <div class="nav">
+            <h1 id="title">textable todos.</h1>
+        </div>
         {% block content %}{% endblock %}
     </div>
 </body>

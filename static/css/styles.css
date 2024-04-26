@@ -1,10 +1,16 @@
 * {
     color-scheme: dark;
     font-family: "Share Tech", sans-serif;
+    --main-accent-green: #80FF72;
+    --main-accent-blue: #7EE8FA;
+    --secondary-color: #7E7F83;
+    --alert-color: #f83454;
+    --main-bg-color: #140D4F;
+    --main-button-color: #F1DEDE;
 }
 
 body {
-    background-color: #28231C;
+    background-color: var(--main-bg-color);
     margin: 0px;
 }
 
@@ -17,9 +23,29 @@ body {
     min-width: 400px;
 }
 
-.app-container h1 {
-    font-size: 3rem;
+.nav {
+    width: 100%;
+    max-width: 600px;
+}
+
+#title {
     margin: 0px;
+    padding: 2px 20px;
+    width: fit-content;
+    box-sizing: border-box;
+    font-size: 2rem;
+    border-radius: 10px 10px 10px 0px;
+    background-color: var(--main-accent-green);
+    color: black;
+}
+
+#title::before {
+    content: '';
+    display: block;
+    position: absolute;
+    border-top: 10px solid transparent;
+    border-right: 10px solid var(--main-accent-green);
+    margin: 28px 0 0 -29px;
 }
 
 .create-task-form {
@@ -31,49 +57,54 @@ body {
     gap: 5px;
 }
 
-.create-task-form input {
-    height: 40px;
-    box-sizing: border-box;
-    padding: 10px;
-    border: 2px solid #070707;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.create-task-form input[type="text"] {
+.task-title-input {
     flex: 90;
-    background-color: #655356;
-    color: white;
+    padding: 10px;
+    background-color: var(--main-accent-blue);
+    color: black;
+    cursor: text;
+    border: 0px;
+    border-radius: 10px;
+    font-size: 1rem;
 }
 
-.create-task-form input[type="submit"] {
-    flex: 10;
-    font-size: 1rem;
-    background-color: #F1DEDE;
+.create-task-form button {
+    height: 40px;
+    width: 40px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: var(--main-button-color);
     color: #070707;
 }
 
-
-.create-task-form input[type="submit"]:hover {
+.create-task-form button:hover {
     background-color: #7c7171;
+}
+
+.task-list {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .task {
     width: 100%;
-    max-width: 600px;
+    min-width: 400px;
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-
-.task a {
+.task-button {
     height: 40px;
+    width: 40px;
     box-sizing: border-box;
     margin: 0px;
     padding: 10px;
-    flex: 10;
     background-color: #F1DEDE;
     color: #070707;
     border: 2px solid #070707;
@@ -83,19 +114,36 @@ body {
     cursor: pointer;
 }
 
-.task a:hover {
+.task-button:hover {
     background-color: #7c7171;
 }
 
-.task p {
+.task-title {
     flex: 80;
     box-sizing: border-box;
     margin: 0px;
     padding: 10px;
-    background-color: #655356;
-    color: white;
-    border: 2px solid #070707;
-    border-radius: 3px;
+    border-radius: 10px 10px 10px 0px;
+    background-color: var(--main-accent-green);
+    color: black;
+}
+
+.task-title::before {
+    content: '';
+    display: block;
+    position: absolute;
+    border-top: 10px solid transparent;
+    border-right: 10px solid var(--main-accent-green);
+    margin: 18px 0 0 -19px;
+}
+
+.complete {
+    text-decoration:line-through;
+    background-color: var(--secondary-color);
+}
+
+.task-title.complete::before {
+    border-right: 10px solid var(--secondary-color);
 }
 
 .update-task-form {
@@ -111,30 +159,24 @@ body {
     margin-bottom: 20px;
 }
 
-.update-task-form .form-row input[type="text"],
-.update-task-form .form-row input[type="submit"] {
+.update-task-form button {
     height: 40px;
     box-sizing: border-box;
     padding: 10px;
     border: 2px solid #070707;
-    border-radius: 3px;
     font-size: 1rem;
 }
 
-.update-task-form input[type="text"] {
-    flex: 80;
-    background-color: #655356;
-    color: white;
-}
-
-.update-task-form input[type="submit"] {
-    flex: 10;
+.update-task-form button {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     background-color: #F1DEDE;
     color: #070707;
     cursor: pointer;
 }
 
-.update-task-form input[type="submit"]:hover {
+.update-task-form button:hover {
     background-color: #7c7171;
 }
 
@@ -146,11 +188,11 @@ body {
     padding: 0px;
     align-items: center;
     justify-content: center;
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     border: 2px solid #070707;
     background-color: #F1DEDE;
-    border-radius: 3px;
+    border-radius: 50%;
     cursor: pointer;
 }
 /* Thanks to https://stackblitz.com/edit/react-ts-ffdaqq?file=App.tsx for the clip path code*/
@@ -167,20 +209,34 @@ body {
     transform: scale(1);
 }
 
+.update-task-form input[type="checkbox"]:checked ~ .task-title-input {
+    text-decoration: line-through;
+    background-color: var(--secondary-color);
+}
+
 .update-task-form input[type="checkbox"]:hover {
     background-color: #7c7171;
 }
 
-.update-task-form textarea {
+.task-description-input {
     resize: none;
     width: 100%;
     box-sizing: border-box;
     padding: 10px;
-    border: 2px solid #070707;
-    border-radius: 3px;
+    border: 0px;
+    border-radius: 10px;
     font-size: 1rem;
-    background-color: #655356;
+    background-color: var(--main-accent-blue);
     color: white;
+}
+
+.task-description-input::before {
+    content: '';
+    display: block;
+    position: absolute;
+    border-top: 10px solid transparent;
+    border-right: 10px solid var(--main-accent-green);
+    margin: 18px 0 0 -19px;
 }
 
 .delete-task-form {
