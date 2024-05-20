@@ -3,3 +3,4 @@ fly.toml
 *.sqlite3
 .vscode/
 .venv/
+.env
