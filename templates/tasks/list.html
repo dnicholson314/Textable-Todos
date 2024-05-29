@@ -19,9 +19,9 @@
 <div class="task-list">
 {% for task in tasks %}
     {%if tasks|first != task %} <hr> {% endif %}
-    <div class="task">
+    <div class="task {% if task.complete == True %}complete{% endif %}">
         <a href="{% url 'update_task' task.id%}" class="task-button"><i class="fa-solid fa-pen fa-lg"></i></a>
-        <p class="task-title {% if task.complete == True %} complete {% endif %}">
+        <p class="task-title">
             {{task}}
         </p>
     </div>

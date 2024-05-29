@@ -164,6 +164,11 @@ button:hover {
     margin-bottom: 10px;
 }
 
+.complete {
+    color: color-mix(in srgb, white, black 60%);
+    text-decoration: line-through;
+}
+
 /*                  */
 /*                  */
 /* TASK LIST STYLES */
