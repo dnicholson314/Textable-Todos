@@ -1,296 +1,305 @@
 * {
     color-scheme: dark;
     font-family: "Share Tech", sans-serif;
-    --main-accent-green: #80FF72;
-    --main-accent-blue: #7EE8FA;
-    --secondary-color: #7E7F83;
+    --bg-color: #080521;
+    --accent-green: #80FF72;
+    --accent-blue: #7EE8FA;
     --alert-color: #f83454;
-    --main-bg-color: #140D4F;
-    --main-button-color: #F1DEDE;
+    --alert-color-hover: #921f32;
+    --divider-color: #1d1b24;
+    --button-color: #D0ADF0;
+    --textbox-color: #212746;
+    --button-hover-color: #977eaf;
+    --bubble-radius: 12px;
 }
 
+/*                */
+/*                */
+/* GENERAL STYLES */
+/*                */
+/*                */
+
 body {
-    background-color: var(--main-bg-color);
+    background-color: var(--bg-color);
     margin: 0px;
 }
 
-.app-container {
+hr {
+    width: 100%;
+    border: 1px solid var(--divider-color);
+    border-radius: 1px;
+}
+
+p, input, button, a, textarea, span, ul, li {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+}
+
+button {
+    background-color: transparent;
+    color: var(--button-color);
+    box-sizing: border-box;
+    border: 0px;
+    border-radius: 10px;
+}
+
+button:hover {
+    color: color-mix(in srgb, var(--button-color), black 40%);
+    cursor:pointer;
+}
+
+.container {
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    gap: 20px;
+    gap: 30px;
     min-width: 400px;
+    max-width: 1000px;
 }
 
 .nav {
+    display: flex;
     width: 100%;
-    max-width: 600px;
+    height: 40px;
+    align-items: center;
+    justify-content: space-between;
 }
 
-#title {
+/*                */
+/*                */
+/* SPECIAL STYLES */
+/*                */
+/*                */
+
+.title {
+    display: inline;
     margin: 0px;
     padding: 2px 20px;
-    width: fit-content;
     box-sizing: border-box;
     font-size: 2rem;
-    border-radius: 10px 10px 10px 0px;
-    background-color: var(--main-accent-green);
+}
+
+#textable {
+    border-radius: var(--bubble-radius);
+    border-bottom-left-radius: 0px;
+    background-color: var(--accent-green);
     color: black;
 }
 
-#title::before {
+#textable::before {
     content: '';
     display: block;
     position: absolute;
     border-top: 10px solid transparent;
-    border-right: 10px solid var(--main-accent-green);
-    margin: 28px 0 0 -29px;
+    border-right: 10px solid var(--accent-green);
+    margin: 28px 0 0 -10px;
 }
 
-.create-task-form {
-    display: flex;
-    width: 100%;
-    max-width: 600px;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-}
-
-.task-title-input {
-    flex: 90;
-    padding: 10px;
-    background-color: var(--main-accent-blue);
+#todos {
+    border-radius: var(--bubble-radius);
+    border-top-right-radius: 0px;
+    background-color: var(--accent-blue);
     color: black;
-    cursor: text;
-    border: 0px;
-    border-radius: 10px;
-    font-size: 1rem;
 }
 
-.create-task-form button {
+#todos::before {
+    content: '';
+    display: block;
+    position: absolute;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid var(--accent-blue);
+    margin: -38px 0 0 264px;
+}
+
+#register {
+    display: flex;
+    align-items: center;
     height: 40px;
     width: 40px;
     box-sizing: border-box;
-    border-radius: 10px;
-    border: 2px solid black;
-    background-color: var(--main-button-color);
-    color: #070707;
+    color: var(--button-color);
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.create-task-form button:hover {
-    background-color: #7c7171;
+#register:hover {
+    color: color-mix(in srgb, var(--button-color), black 40%);
 }
+
+#logout {
+    width: 40px;
+    height: 40px;
+}
+
+#delete {
+    color: var(--alert-color);
+}
+
+#delete:hover {
+    color: var(--alert-color-hover)
+}
+
+#warning {
+    background-color: var(--accent-blue);
+    color: black;
+    font-weight: bold;
+    padding: 8px 10px;
+    border-radius: var(--bubble-radius);
+    flex: 1;
+}
+
+.error {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/*                  */
+/*                  */
+/* TASK LIST STYLES */
+/*                  */
+/*                  */
 
 .task-list {
     display: flex;
     width: 100%;
-    max-width: 600px;
     flex-direction: column;
+    gap: 10px;
+}
+
+.task {
+    display: flex;
+    width: 100%;
     align-items: center;
     gap: 20px;
 }
 
-.task {
-    width: 100%;
-    min-width: 400px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+.task-title {
+    flex: 1;
 }
 
 .task-button {
-    height: 40px;
+    color: var(--button-color);
     width: 40px;
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 10px;
-    background-color: #F1DEDE;
-    color: #070707;
-    border: 2px solid #070707;
-    border-radius: 3px;
+    height: 25px;
     text-align: center;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 .task-button:hover {
-    background-color: #7c7171;
+    color: color-mix(in srgb, var(--button-color), black 40%);
 }
 
-.task-title {
-    flex: 80;
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 10px;
-    border-radius: 10px 10px 10px 0px;
-    background-color: var(--main-accent-green);
-    color: black;
-}
+/*                     */
+/*                     */
+/* GENERAL FORM STYLES */
+/*                     */
+/*                     */
 
-.task-title::before {
-    content: '';
-    display: block;
-    position: absolute;
-    border-top: 10px solid transparent;
-    border-right: 10px solid var(--main-accent-green);
-    margin: 18px 0 0 -19px;
-}
-
-.complete {
-    text-decoration:line-through;
-    background-color: var(--secondary-color);
-}
-
-.task-title.complete::before {
-    border-right: 10px solid var(--secondary-color);
-}
-
-.update-task-form {
+.task-form {
+    display: flex;
     width: 100%;
-    max-width: 600px;
-}
-
-.update-task-form .form-row {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
-    margin-bottom: 20px;
+    gap: 10px;
 }
 
-.update-task-form button {
-    height: 40px;
-    box-sizing: border-box;
-    padding: 10px;
-    border: 2px solid #070707;
-    font-size: 1rem;
-}
-
-.update-task-form button {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: #F1DEDE;
-    color: #070707;
-    cursor: pointer;
-}
-
-.update-task-form button:hover {
-    background-color: #7c7171;
-}
-
-.update-task-form input[type="checkbox"] {
-    display: flex;
-    appearance: none;
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
-    align-items: center;
-    justify-content: center;
+.task-form-submit {
     height: 40px;
     width: 40px;
-    border: 2px solid #070707;
-    background-color: #F1DEDE;
-    border-radius: 50%;
-    cursor: pointer;
 }
-/* Thanks to https://stackblitz.com/edit/react-ts-ffdaqq?file=App.tsx for the clip path code*/
-.update-task-form input[type="checkbox"]::before {
-    content: "";
+
+.task-form-title {
+    height: 40px;
+    flex: 1;
+    background-color: var(--textbox-color);
+    color: white;
+    padding-left: 10px;
+    box-sizing: border-box;
+    border: 0px;
+    border-radius: var(--bubble-radius);
+}
+
+.task-form-complete {
     width: 30px;
     height: 30px;
-    clip-path: polygon(17% 54%, 28% 43%, 38% 54%, 70% 22%, 81% 33%, 38% 75%, 17% 54%);
-    transform: scale(0);
-    background-color: #070707;
+    margin-left: 5px;
+    margin-right: 10px;
+    accent-color: var(--button-color);
 }
 
-.update-task-form input[type="checkbox"]:checked::before {
-    transform: scale(1);
-}
-
-.update-task-form input[type="checkbox"]:checked ~ .task-title-input {
-    text-decoration: line-through;
-    background-color: var(--secondary-color);
-}
-
-.update-task-form input[type="checkbox"]:hover {
-    background-color: #7c7171;
-}
-
-.task-description-input {
+.task-form-description {
     resize: none;
-    width: 100%;
-    box-sizing: border-box;
     padding: 10px;
+    box-sizing: border-box;
+    border-radius: var(--bubble-radius);
     border: 0px;
-    border-radius: 10px;
-    font-size: 1rem;
-    background-color: var(--main-accent-blue);
+    background-color: var(--textbox-color);
     color: white;
 }
 
-.task-description-input::before {
-    content: '';
-    display: block;
-    position: absolute;
-    border-top: 10px solid transparent;
-    border-right: 10px solid var(--main-accent-green);
-    margin: 18px 0 0 -19px;
+
+/*                           */
+/*                           */
+/* SPECIFIC TASK FORM STYLES */
+/*                           */
+/*                           */
+
+.update-task-form-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.delete-task-form {
+#update-task-row {
+    gap: 5px;
+}
+
+.delete-task-form-container {
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 10px;
+}
+
+
+/*                   */
+/*                   */
+/* LOGIN PAGE STYLES */
+/*                   */
+/*                   */
+
+.login-form {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    min-width: 400px;
     width: 100%;
-    max-width: 600px;
 }
 
-.warning {
-    flex: 80;
+.login-form-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+}
+
+#id_username, #id_password, #id_email, #id_password1, #id_password2 {
     box-sizing: border-box;
-    padding: 10px;
-    background: #655356;
-    border: 2px solid #070707;
-    border-radius: 3px;
-    font-size: 1rem;
-    text-align: center;
-}
-
-.delete-task-form a {
+    border: 0px;
+    border-radius: var(--bubble-radius);
     height: 40px;
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 10px;
-    flex: 10;
-    background-color: #F1DEDE;
-    color: #070707;
-    border: 2px solid #070707;
-    border-radius: 3px;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.delete-task-form a:hover {
-    background-color: #7c7171;
-}
-
-.delete-task-form input[type="submit"] {
-    flex: 10;
-    height: 40px;
-    box-sizing: border-box;
-    padding: 10px;
-    background-color: #f83454;
+    padding: 0px 10px;
+    background-color: var(--textbox-color);
     color: white;
-    border: 2px solid #070707;
-    border-radius: 3px;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.delete-task-form input[type="submit"]:hover {
-    background-color: #6e1222;
 }

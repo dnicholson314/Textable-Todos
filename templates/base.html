@@ -20,9 +20,13 @@
     <script src="https://kit.fontawesome.com/192c7d57fa.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="app-container">
+    <div class="container">
         <div class="nav">
-            <h1 id="title">textable todos.</h1>
+            <span><a href="\tasks\">
+                <h1 class="title" id="textable">textable</h1>
+                <h1 class="title" id="todos">todos.</h1>
+            </a></span>
+            {% block nav %}{% endblock %}
         </div>
         {% block content %}{% endblock %}
     </div>

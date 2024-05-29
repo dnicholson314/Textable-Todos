@@ -1,29 +1,31 @@
 {% extends "base.html" %}
 
+{% block nav %}
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{% url 'login' %}">
+    <button id="logout" type="submit"><i class="fa-solid fa-right-from-bracket fa-lg"></i></button>
+</form>
+{% endblock %}
+
 {% block content %}
 
-<form class="create-task-form" method="POST" action="{% url 'list' %}">
+<form class="task-form" method="POST" action="{% url 'list' %}">
     {% csrf_token %}
-    <button type="submit" name="Create Task"><i class="fa-solid fa-paper-plane"></i></button>
+    <button class="task-form-submit" type="submit" name="Create Task"><i class="fa-solid fa-plus fa-xl"></i></button>
     {{form.title}}
 </form>
 
 <div class="task-list">
 {% for task in tasks %}
+    {%if tasks|first != task %} <hr> {% endif %}
     <div class="task">
+        <a href="{% url 'update_task' task.id%}" class="task-button"><i class="fa-solid fa-pen fa-lg"></i></a>
         <p class="task-title {% if task.complete == True %} complete {% endif %}">
             {{task}}
         </p>
-        <a href="{% url 'update_task' task.id%}" class="task-button"><i class="fa-solid fa-pen"></i></a>
-        <a href="{% url 'delete_task' task.id%}" class="task-button"><i class="fa-solid fa-trash"></i></a>
     </div>
 {% endfor %}
 </div>
-
-<form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
-    <input type="hidden" name="next" value="{% url 'login' %}">
-    <button type="submit">Logout</button>
-</form>
 
 {% endblock %}

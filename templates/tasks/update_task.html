@@ -2,13 +2,15 @@
 
 {% block content %}
 
-<form class="update-task-form" method="POST" action="">
+<form class="update-task-form-container" method="POST" action="">
     {% csrf_token %}
-    <div class="form-row">
-        <button type="submit" name="update-task"><i class="fa-solid fa-paper-plane"></i></button>
+    <div id="update-task-row" class="task-form">
+        <button class="task-form-submit" type="submit" name="update-task"><i class="fa-solid fa-pen fa-lg"></i></button>
+        <a href="{% url 'delete_task' task.id%}" id="delete" class="task-button"><i class="fa-solid fa-trash fa-lg"></i></a>
         {{ form.complete }}
         {{ form.title }}
     </div>
+    <hr>
     {{ form.description }}
 </form>
 

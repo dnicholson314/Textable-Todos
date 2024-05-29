@@ -1,11 +1,26 @@
 {% extends "base.html" %}
 
-{% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">Login</button>
-</form>
+{% block nav %}<a id="register" href="/register"><i class="fa-solid fa-user-plus"></i></a>{% endblock %}
 
-<a href="/register">Create account</a>
+{% block content %}
+<form class="login-form" method="post">
+    {% csrf_token %}
+    <div class="login-form-inputs">
+        <div class="login-form-inputs">
+            {% for field in form %}
+                {{ field }}
+                {% if field.errors %}
+                    <hr>
+                    <div class="error">
+                        {% for error in field.errors %}
+                            <p class="error"><em>{{ error }}</em></p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <button type="submit"><i class="fa-solid fa-right-to-bracket fa-lg"></i></button>
+</form>
+<span class="error"><em>{{ form.non_field_errors }}</em></span>
 {% endblock %}

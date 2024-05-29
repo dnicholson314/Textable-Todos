@@ -7,6 +7,7 @@ from django.contrib.auth import login
 from django.http import HttpResponseForbidden
 
 class TaskLoginView(LoginView):
+    form_class = forms.LoginForm
     template_name = 'registration/login.html'
     redirect_authenticated_user = True
 
@@ -63,7 +64,8 @@ def update_task(request, pk):
 
     form = forms.TaskForm(instance=task)
     context = {
-        'form': form
+        'form': form,
+        'task': task,
     }
 
     return render(request, "tasks/update_task.html", context)
