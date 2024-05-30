@@ -20,6 +20,10 @@ class TaskForm(forms.ModelForm):
                 'placeholder': 'Enter task description',
                 'class': 'task-form-description',
             }),
+            'due_date': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'task-form-due-date',
+            }),
         }
 
 class LoginForm(AuthenticationForm):

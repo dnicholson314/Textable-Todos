@@ -9,6 +9,7 @@
         <a href="{% url 'delete_task' task.id%}" id="delete" class="task-button"><i class="fa-solid fa-trash fa-lg"></i></a>
         {{ form.complete }}
         {{ form.title }}
+        {{ form.due_date }}
     </div>
     <hr>
     {{ form.description }}

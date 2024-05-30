@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.http import HttpResponseForbidden
+from django.utils.timezone import now, timedelta
 
 class TaskLoginView(LoginView):
     form_class = forms.LoginForm
@@ -22,7 +23,18 @@ def index(request):
 
         return redirect(reverse('list'))
     else:
-        tasks = models.Task.objects.filter(user=request.user)
+        tasks = models.Task.objects.filter(user=request.user).order_by('due_date')
+        current_date = now().date()
+
+        for task in tasks:
+            due_date = task.due_date
+            if not due_date:
+                continue
+
+            one_week_before_due_date = due_date - timedelta(days=7)
+
+            task.is_near_due = not task.complete and one_week_before_due_date <= current_date < due_date
+            task.is_overdue = not task.complete and due_date <= current_date
         form = forms.TaskForm
 
     context = {

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% now "Y" as current_year %}
 
 {% block nav %}
 <form action="{% url 'logout' %}" method="post">
@@ -14,6 +15,7 @@
     {% csrf_token %}
     <button class="task-form-submit" type="submit" name="Create Task"><i class="fa-solid fa-plus fa-xl"></i></button>
     {{form.title}}
+    {{form.due_date}}
 </form>
 
 <div class="task-list">
@@ -21,9 +23,22 @@
     {%if tasks|first != task %} <hr> {% endif %}
     <div class="task {% if task.complete == True %}complete{% endif %}">
         <a href="{% url 'update_task' task.id%}" class="task-button"><i class="fa-solid fa-pen fa-lg"></i></a>
-        <p class="task-title">
-            {{task}}
-        </p>
+        <p class="task-title">{{task}}</p>
+        {% if task.due_date %}
+            <p class="
+                task-due-date
+                {% if task.is_near_due %}almost{% endif %}
+                {% if task.is_overdue %}overdue{% endif %}
+            ">
+                {% if task.due_date.year == current_year %}
+                    {{ task.due_date|date:"M d Y" }}
+                {% else %}
+                    {{ task.due_date|date:"M d" }}
+                {% endif %}
+            </p>
+            <p class="spacer"></p>
+            
+        {% endif %}
     </div>
 {% endfor %}
 </div>
