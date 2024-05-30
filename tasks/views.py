@@ -23,7 +23,7 @@ def index(request):
 
         return redirect(reverse('list'))
     else:
-        tasks = models.Task.objects.filter(user=request.user).order_by('due_date')
+        tasks = models.Task.objects.filter(user=request.user).order_by('due_date', 'title')
         current_date = now().date()
 
         for task in tasks:
