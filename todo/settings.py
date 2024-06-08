@@ -12,7 +12,11 @@ SECRET_KEY = env.str("SECRET_KEY", default="django-insecure-^qi19(+(oo-ere5b&$@2
 
 DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = ["textable-todos.fly.dev", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["textable-todos.fly.dev"]
+if DEBUG:
+    NGROK_DOMAIN = env("NGROK_DOMAIN")
+    ALLOWED_HOSTS.extend(["localhost", "127.0.0.1", NGROK_DOMAIN])
+
 CSRF_TRUSTED_ORIGINS = ["https://textable-todos.fly.dev"]
 
 INSTALLED_APPS = [
@@ -21,11 +25,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    "whitenoise",
+    'whitenoise',
     'django.contrib.staticfiles',
 
     "django_browser_reload",
     'tasks',
+    'webhooks',
 ]
 
 MIDDLEWARE = [
