@@ -179,13 +179,12 @@ button:hover {
     display: flex;
     width: 100%;
     flex-direction: column;
-    gap: 10px;
 }
 
 .task {
     display: flex;
     width: 100%;
-    height: 40px;
+    min-height: 35px;
     align-items: center;
     gap: 20px;
 }
@@ -218,6 +217,14 @@ button:hover {
 
 .task-button:hover {
     color: color-mix(in srgb, var(--button-color), black 40%);
+}
+
+#update-button {
+    display: none;
+}
+
+.task:hover #update-button {
+    display: inline;
 }
 
 /*                     */
