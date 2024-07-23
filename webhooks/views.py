@@ -1,31 +1,18 @@
-from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse, HttpResponseBadRequest
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseBadRequest, HttpResponseServerError
 from django.views.decorators.csrf import csrf_exempt
-from nacl.signing import VerifyKey
-from nacl.exceptions import BadSignatureError
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 
-from . import PUBLIC_KEY, INTERACTION_TYPES, CALLBACK_TYPES
+from .services import _validate_request, _process_user_response, _process_discord_auth
 
 import json
 
-# Remember to update ngrok link in the settings for development!
-# Eventually kick all the processing code (after verifying) to processors.py or services.py
-# Maybe log all interactions in db?
+# Log all interactions in db
 # Create tests
 
-def _validate_request(request):
-    verify_key = VerifyKey(bytes.fromhex(PUBLIC_KEY))
-
-    signature = request.headers["X-Signature-Ed25519"]
-    timestamp = request.headers["X-Signature-Timestamp"]
-    body = request.body.decode("utf-8")
-
-    try:
-        return verify_key.verify(f'{timestamp}{body}'.encode(), bytes.fromhex(signature))
-    except BadSignatureError:
-        return False
-
 @csrf_exempt
-def test_webhook(request):
+def textable_todos_discord_bot_webhook(request):
     if request.method != "POST":
         return HttpResponseNotAllowed("POST")
 
@@ -36,19 +23,27 @@ def test_webhook(request):
     data = json.loads(data_str)
 
     if "type" not in data:
-        return HttpResponseBadRequest()
+        return HttpResponseBadRequest("No request type could be found")
 
-    payload = {}
-    if data["type"] == INTERACTION_TYPES["PING"]:
-        payload = {
-            "type": CALLBACK_TYPES["PONG"]
-        }
-    elif data["type"] == INTERACTION_TYPES["APPLICATION_COMMAND"]:
-        payload = {
-            "type": CALLBACK_TYPES["CHANNEL_MESSAGE_WITH_SOURCE"],
-            "data": {
-                "content": "Task received!"
-            },
-        }
+    return _process_user_response(data)
 
-    return JsonResponse(payload)
+@csrf_exempt
+@login_required
+def receive_discord_auth(request):
+    state = request.GET.get('state', None)
+    if not state:
+        return HttpResponseBadRequest("No state parameter")
+
+    stored_state = request.session.pop('oauth2_state', '')
+    if state != stored_state:
+        return HttpResponseBadRequest("Invalid state parameter")
+
+    code = request.GET.get('code', None)
+    if not code:
+        return HttpResponseBadRequest("No auth code received")
+
+    authentication_processed = _process_discord_auth(request, code)
+    if not authentication_processed:
+        return HttpResponseServerError("Unable to process request")
+
+    return redirect("user_settings")
