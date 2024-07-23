@@ -4,3 +4,4 @@ fly.toml
 .vscode/
 .venv/
 .env
+discord_bot_admin.py

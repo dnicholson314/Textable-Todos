@@ -4,3 +4,4 @@
 *.env
 __pycache__/
 .staticfiles/
+discord_bot_admin.py
