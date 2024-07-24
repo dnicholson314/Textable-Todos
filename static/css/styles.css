@@ -219,14 +219,6 @@ button:hover {
     color: color-mix(in srgb, var(--button-color), black 40%);
 }
 
-#update-button {
-    display: none;
-}
-
-.task:hover #update-button {
-    display: inline;
-}
-
 /*                     */
 /*                     */
 /* GENERAL FORM STYLES */
