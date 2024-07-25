@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 
-from .services import _validate_request, _process_user_response, _process_discord_auth
+from .services import validate_request, process_discord_bot_webhook, process_discord_auth
 
 import json
 
@@ -12,11 +12,11 @@ import json
 # Create tests
 
 @csrf_exempt
-def textable_todos_discord_bot_webhook(request):
+def discord_bot_webhook(request):
     if request.method != "POST":
         return HttpResponseNotAllowed("POST")
 
-    if not _validate_request(request):
+    if not validate_request(request):
         return HttpResponse('Unauthorized', status=401)
 
     data_str = request.body.decode()
@@ -25,11 +25,11 @@ def textable_todos_discord_bot_webhook(request):
     if "type" not in data:
         return HttpResponseBadRequest("No request type could be found")
 
-    return _process_user_response(data)
+    return process_discord_bot_webhook(data)
 
 @csrf_exempt
 @login_required
-def receive_discord_auth(request):
+def discord_auth_webhook(request):
     state = request.GET.get('state', None)
     if not state:
         return HttpResponseBadRequest("No state parameter")
@@ -42,7 +42,7 @@ def receive_discord_auth(request):
     if not code:
         return HttpResponseBadRequest("No auth code received")
 
-    authentication_processed = _process_discord_auth(request, code)
+    authentication_processed = process_discord_auth(request, code)
     if not authentication_processed:
         return HttpResponseServerError("Unable to process request")
 
