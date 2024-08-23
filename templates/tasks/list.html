@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% now "Y" as current_year %}
+{% load static %}
 
 {% block nav %}
 <form action="{% url 'logout' %}" method="post">
@@ -41,5 +42,7 @@
     </div>
 {% endfor %}
 </div>
+
+<script src="{% static 'js/reload.js' %}"></script>
 
 {% endblock %}
