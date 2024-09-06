@@ -2,6 +2,31 @@
 
 {% block content %}
 
-<p>test</p>
+<h2>Discord integration</h2>
+
+{%if discord_username %}
+    <p>
+        Discord account connected:
+        <span class="discord-chip-base">
+            <i class="fa-brands fa-discord fa-sm"></i>
+            {{discord_username}}
+        </span>
+    </p>
+{% else %}
+    <p>No Discord account found.
+        <a class="discord-chip-base discord-chip-hoverable" href="{% url 'initiate_discord_auth' %}">
+            <i class="fa-brands fa-discord fa-sm"></i>
+            Connect your Discord account
+        </a>
+    </p>
+{% endif %}
+
+<h2>Logout</h2>
+
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{% url 'login' %}">
+    <button id="logout" type="submit"><i class="fa-solid fa-right-from-bracket fa-lg"></i></button>
+</form>
 
 {% endblock %}

@@ -10,6 +10,7 @@
     --button-color: #D0ADF0;
     --textbox-color: #212746;
     --button-hover-color: #977eaf;
+    --discord-blurple: #5865F2;
     --bubble-radius: 12px;
 }
 
@@ -33,6 +34,11 @@ hr {
 p, input, button, a, textarea, span, ul, li {
     font-size: 1.4rem;
     margin: 0;
+}
+
+h2 {
+    font-size: 2rem;
+    margin: 0px;
 }
 
 a {
@@ -90,36 +96,18 @@ button:hover {
     font-size: 2rem;
 }
 
-#textable {
+.textable {
     border-radius: var(--bubble-radius);
     border-bottom-left-radius: 0px;
     background-color: var(--accent-green);
     color: black;
 }
 
-#textable::before {
-    content: '';
-    display: block;
-    position: absolute;
-    border-top: 10px solid transparent;
-    border-right: 10px solid var(--accent-green);
-    margin: 28px 0 0 -10px;
-}
-
-#todos {
+.todos {
     border-radius: var(--bubble-radius);
     border-top-right-radius: 0px;
     background-color: var(--accent-blue);
     color: black;
-}
-
-#todos::before {
-    content: '';
-    display: block;
-    position: absolute;
-    border-bottom: 10px solid transparent;
-    border-left: 10px solid var(--accent-blue);
-    margin: -38px 0 0 264px;
 }
 
 #register {
@@ -135,11 +123,6 @@ button:hover {
 
 #register:hover {
     color: color-mix(in srgb, var(--button-color), black 40%);
-}
-
-#logout {
-    width: 40px;
-    height: 40px;
 }
 
 #delete {
@@ -332,4 +315,21 @@ button:hover {
     padding: 0px 10px;
     background-color: var(--textbox-color);
     color: white;
+}
+
+/*                      */
+/*                      */
+/* SETTINGS PAGE STYLES */
+/*                      */
+/*                      */
+
+.discord-chip-base {
+    padding: 5px;
+    background-color: var(--discord-blurple);
+    border-radius: var(--bubble-radius);
+    color: white;
+}
+
+.discord-chip-hoverable:hover {
+    background-color: color-mix(in srgb, var(--discord-blurple), black 40%);
 }
