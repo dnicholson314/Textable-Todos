@@ -16,6 +16,8 @@ from nacl.exceptions import BadSignatureError
 
 from todo.settings import DISCORD_BOT_PUBLIC_KEY, DISCORD_APPLICATION_ID, DISCORD_BOT_CLIENT_SECRET
 
+TASK_COMMAND_NAME = "todo"
+
 INTERACTION_TYPES = {
     "PING": 1,
     "APPLICATION_COMMAND": 2,
@@ -30,6 +32,7 @@ BOT_RESPONSES = {
     "SUCCESS": "Task received!",
     "UNAUTHORIZED": "Unable to verify your account. Are you registered with the app?",
     "UNPROCESSED": "Unable to add task due to a server error. Make sure you formatted the date correctly!",
+    "OTHER": "Unable to add task due to a server error."
 }
 
 DISCORD_OAUTH2_TOKEN_URL = "https://discord.com/api/oauth2/token"
@@ -48,28 +51,25 @@ def _exchange_code(request, code):
         'Content-Type': 'application/x-www-form-urlencoded'
     }
 
-    r = requests.post(DISCORD_OAUTH2_TOKEN_URL, data=data, headers=headers)
-    r.raise_for_status()
-    return r.json()
+    response = requests.post(DISCORD_OAUTH2_TOKEN_URL, data=data, headers=headers)
+    response.raise_for_status()
+    return response.json()
 
-def _get_user_id_from_token(response):
-    if not "access_token" in response:
-        raise HttpResponseServerError("Unable to process request: token could not be retreived from dictionary")
-
-    token = response["access_token"]
+def _get_discord_id_and_username(token) -> tuple[int, str]:
     headers = {
         "Authorization": f"Bearer {token}"
     }
-    
-    r = requests.get(DISCORD_OAUTH2_INFO_URL, headers=headers)
-    r.raise_for_status()
-    data = r.json()
+
+    response = requests.get(DISCORD_OAUTH2_INFO_URL, headers=headers)
+    response.raise_for_status()
+    data = response.json()
 
     if "user" not in data:
         raise HttpResponseServerError("Unable to process request: user data not found") 
-    user_id = data["user"]["id"]
+    discord_id = data["user"]["id"]
+    discord_username = data["user"]["username"]
 
-    return user_id
+    return (discord_id, discord_username)
 
 def _verify_user_id_from_webhook_data(data):
     if "member" not in data:
@@ -114,6 +114,11 @@ def _process_slash_command(data):
         },
     }
 
+    name = data["data"]["name"]
+    if name != TASK_COMMAND_NAME:
+        payload["data"]["content"] = BOT_RESPONSES["OTHER"]
+        return payload
+
     user = _verify_user_id_from_webhook_data(data)
     if not user:
         payload["data"]["content"] = BOT_RESPONSES["UNAUTHORIZED"]
@@ -141,8 +146,14 @@ def process_discord_auth(request, code):
     response = _exchange_code(request, code)
     config, _ = Config.objects.get_or_create(user=request.user)
 
-    user_id = _get_user_id_from_token(response)
-    config.discord_id = user_id
+    if not "access_token" in response:
+        raise HttpResponseServerError("Unable to process request: token could not be retreived from response")
+
+    token = response["access_token"]
+    discord_id, discord_username = _get_discord_id_and_username(token)
+    config.discord_id = discord_id
+    config.discord_username = discord_username
+
     try:
         config.save()
     except IntegrityError:

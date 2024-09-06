@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseNotAllowed
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
@@ -9,6 +8,8 @@ from urllib import parse
 import uuid
 
 from todo.settings import DISCORD_APPLICATION_ID
+
+from .models import Config
 
 DISCORD_OAUTH2_AUTH_URL = "https://discord.com/oauth2/authorize"
 
@@ -20,10 +21,17 @@ URL_PARAMS = {
 
 @login_required
 def user_config_general(request):
-    if request.method != "GET":
-        return HttpResponseNotAllowed("GET")
+    try:
+        config = Config.objects.get(user=request.user)
+        discord_username = config.discord_username
+    except Config.DoesNotExist:
+        discord_username = ""
 
-    return render(request, 'configs/general.html')
+    context = {
+        "discord_username": discord_username,
+    }
+
+    return render(request, 'configs/general.html', context)
 
 def initiate_discord_auth(request):
     state = str(uuid.uuid4())
