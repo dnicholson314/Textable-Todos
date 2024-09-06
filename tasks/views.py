@@ -52,7 +52,6 @@ def register(request):
             return redirect('list')
     else:
         form = forms.SignUpForm()
-        print(form.fields)
 
     context = {
         'form': form

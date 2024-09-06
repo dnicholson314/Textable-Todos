@@ -1,5 +1,3 @@
-import os
-
 from pathlib import Path
 from environs import Env
 
@@ -10,10 +8,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env.str("SECRET_KEY", default="django-insecure-^qi19(+(oo-ere5b&$@275chw)k@7ob1)74aol5d$(k*)5kk5)")
 
+DISCORD_BOT_PUBLIC_KEY = env("DISCORD_BOT_PUBLIC_KEY")
+DISCORD_APPLICATION_ID = env("DISCORD_APPLICATION_ID")
+DISCORD_BOT_TOKEN = env("DISCORD_BOT_TOKEN")
+DISCORD_BOT_CLIENT_SECRET = env("DISCORD_BOT_CLIENT_SECRET")
+
 DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = ["textable-todos.fly.dev", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["textable-todos.fly.dev"]
 CSRF_TRUSTED_ORIGINS = ["https://textable-todos.fly.dev"]
+if DEBUG:
+    NGROK_DOMAIN = env("NGROK_DOMAIN")
+    ALLOWED_HOSTS.extend(["localhost", "127.0.0.1", NGROK_DOMAIN])
+    CSRF_TRUSTED_ORIGINS.append(f"https://{NGROK_DOMAIN}")
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -21,11 +28,13 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    "whitenoise",
+    'whitenoise',
     'django.contrib.staticfiles',
 
     "django_browser_reload",
     'tasks',
+    'webhooks',
+    'configs',
 ]
 
 MIDDLEWARE = [

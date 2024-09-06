@@ -12,4 +12,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('', RedirectView.as_view(url='login/')),
     path('register/', register, name="register"),
+    path('webhooks/', include('webhooks.urls')),
+    path('settings/', include('configs.urls')),
 ]

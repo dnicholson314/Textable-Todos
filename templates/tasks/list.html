@@ -3,11 +3,9 @@
 {% load static %}
 
 {% block nav %}
-<form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
-    <input type="hidden" name="next" value="{% url 'login' %}">
-    <button id="logout" type="submit"><i class="fa-solid fa-right-from-bracket fa-lg"></i></button>
-</form>
+<a id="settings" href="{% url 'user_settings' %}">
+    <i class="fa-solid fa-bars fa-lg"></i>
+</a>
 {% endblock %}
 
 {% block content %}
