@@ -11,7 +11,7 @@ class Config(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
-    discord_id = models.IntegerField(
+    discord_id = models.PositiveBigIntegerField(
         blank=True,
         default=0,
         unique=True,
