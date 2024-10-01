@@ -110,18 +110,19 @@ button:hover {
     color: black;
 }
 
-#register {
+#nav-button {
     display: flex;
     align-items: center;
-    height: 40px;
-    width: 40px;
-    box-sizing: border-box;
+    justify-content: center;
     color: var(--button-color);
-    text-decoration: none;
-    font-weight: bold;
+    /*height: 40px;*/
+    /*width: 40px;*/
+    /* box-sizing: border-box; */
+    /* text-decoration: none; */
+    /* font-weight: bold; */
 }
 
-#register:hover {
+#nav-button:hover {
     color: color-mix(in srgb, var(--button-color), black 40%);
 }
 
