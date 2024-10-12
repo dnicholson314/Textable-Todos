@@ -31,7 +31,7 @@ def user_config_general(request):
         "discord_username": discord_username,
     }
 
-    return render(request, 'configs/general.html', context)
+    return render(request, 'configs/settings.html', context)
 
 def initiate_discord_auth(request):
     state = str(uuid.uuid4())
