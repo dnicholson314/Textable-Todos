@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% now "Y" as current_year %}
 {% load static %}
 
 {% block nav %}
@@ -13,8 +12,8 @@
 <form class="task-form" method="POST" action="{% url 'list' %}">
     {% csrf_token %}
     <button class="task-form-submit" type="submit" name="Create Task"><i class="fa-solid fa-plus fa-xl"></i></button>
+    {{ form.due_date }}
     {{form.title}}
-    {{form.due_date}}
 </form>
 
 <div class="task-list">
@@ -30,12 +29,11 @@
                 {% if task.is_overdue %}overdue{% endif %}
             ">
                 {% if task.due_date.year == current_year %}
-                    {{ task.due_date|date:"M d Y" }}
-                {% else %}
                     {{ task.due_date|date:"M d" }}
+                {% else %}
+                    {{ task.due_date|date:"M d, Y" }}
                 {% endif %}
             </p>
-            <p class="spacer"></p>
         {% endif %}
     </div>
 {% endfor %}

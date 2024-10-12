@@ -40,6 +40,7 @@ def index(request):
     context = {
         'tasks': tasks,
         'form': form,
+        'current_year': now().year
     }
     return render(request, 'tasks/list.html', context)
 

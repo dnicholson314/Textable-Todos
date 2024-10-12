@@ -11,9 +11,8 @@
 {% block content %}
 <form class="delete-task-form-container" method="POST" action="">
     {% csrf_token %}
+    <span><b>Confirm deletion of "{{task}}"?</b></span>
     <button id="delete" class="task-form-submit" type="submit" name="Confirm"><i class="fa-solid fa-trash fa-lg" aria-hidden="true"></i></button>
     <a class="task-button" href="{% url 'update_task' task.id%}"><i class="fa-solid fa-ban fa-lg"></i></a>
-    <span><b>Confirm deletion of "{{task}}"?</b></span>
-    
 </form>
 {% endblock %}
