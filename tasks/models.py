@@ -8,6 +8,7 @@ class Task(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     due_date = models.DateField(blank=True, null=True)
     description = models.TextField(default="", blank=True)
+    starred = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

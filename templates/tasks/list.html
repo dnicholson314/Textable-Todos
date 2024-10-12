@@ -18,8 +18,11 @@
 
 <div class="task-list">
 {% for task in tasks %}
-    {%if tasks|first != task %} <hr> {% endif %}
-    <div class="task {% if task.complete == True %}complete{% endif %}">
+    <div class="
+        task 
+        {% if task.complete %}complete
+        {% elif task.starred %}starred{% endif %}
+    ">
         <a href="{% url 'update_task' task.id%}" class="task-button"><i class="fa-solid fa-ellipsis-vertical"></i></a>
         <p class="task-title">{{task}}</p>
         {% if task.due_date %}

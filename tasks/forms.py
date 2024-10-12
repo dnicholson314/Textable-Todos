@@ -23,7 +23,11 @@ class TaskForm(forms.ModelForm):
             'due_date': forms.DateInput(attrs={
                 'type': 'date',
                 'class': 'task-form-due-date',
+                'placeholder': 'mm/dd/yy',
             }),
+            'starred': forms.CheckboxInput(attrs={
+                'class': 'task-form-starred'
+            })
         }
 
 class LoginForm(AuthenticationForm):

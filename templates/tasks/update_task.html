@@ -4,14 +4,18 @@
 
 <form class="update-task-form-container" method="POST" action="">
     {% csrf_token %}
-    <div id="update-task-row" class="task-form">
-        <button class="task-form-submit" type="submit" name="update-task"><i class="fa-solid fa-pen fa-lg"></i></button>
-        <a href="{% url 'delete_task' task.id%}" id="delete" class="task-button"><i class="fa-solid fa-trash fa-lg"></i></a>
-        {{ form.complete }}
-        {{ form.title }}
+    <div class="task-form" id="update-task-form">
+        <button class="task-form-submit" type="submit" name="update-task"><i class="fa-solid fa-pen-to-square fa-lg"></i></button>
         {{ form.due_date }}
+        {{ form.title }}
     </div>
-    <hr>
+    <div class="update-task-row">
+        <span>Complete: {{ form.complete }}</span>
+        <span>Starred: {{form.starred }}</span>
+        <span>Delete: <a href="{% url 'delete_task' task.id%}" id="delete" class="task-button">
+            <i class="fa-solid fa-trash"></i></button>
+        </a></span>
+    </div>
     {{ form.description }}
 </form>
 

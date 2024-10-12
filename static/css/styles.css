@@ -8,8 +8,8 @@
     --alert-color-hover: #921f32;
     --divider-color: #1d1b24;
     --button-color: #D0ADF0;
+    --starred-color:#ffe60040;
     --textbox-color: #212746;
-    --button-hover-color: #977eaf;
     --discord-blurple: #5865F2;
     --bubble-radius: 12px;
 }
@@ -166,10 +166,28 @@ button:hover {
 
 .task {
     display: flex;
-    width: 100%;
-    min-height: 35px;
+    box-sizing: border-box;
+    min-height: 50px;
     align-items: center;
     gap: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    border-bottom: 2px solid #ffffff20;
+}
+
+/* Inhumane CSS selector */
+.task:has(+ .starred) {
+    border-bottom: 0px;
+}
+
+.starred {
+    background-color: #ffe60040;
+    border: 2px solid #ffffff20;
+}
+
+.starred .task-title::before {
+    content: "⭐ ";
 }
 
 .task-title {
@@ -238,11 +256,11 @@ button:hover {
 }
 
 .task-form-complete {
-    width: 30px;
-    height: 30px;
-    margin-left: 5px;
-    margin-right: 10px;
     accent-color: var(--button-color);
+}
+
+.task-form-starred {
+    accent-color: var(--starred-color)
 }
 
 .task-form-due-date {
@@ -279,8 +297,12 @@ button:hover {
     gap: 10px;
 }
 
-#update-task-row {
-    gap: 10px;
+#update-task-form {
+    padding-bottom: 0px;
+}
+
+.update-task-row * {
+    font-size: 1rem;
 }
 
 .delete-task-form-container {
