@@ -10,9 +10,9 @@
         {{ form.title }}
     </div>
     <div class="update-task-row">
-        <span>Complete: {{ form.complete }}</span>
-        <span>Starred: {{form.starred }}</span>
-        <span>Delete: <a href="{% url 'delete_task' task.id%}" id="delete" class="task-button">
+        <span class="chip">Complete: {{ form.complete }}</span>
+        <span class="chip">Starred: {{form.starred }}</span>
+        <span class="chip">Delete: <a href="{% url 'delete_task' task.id%}" id="delete" class="task-button">
             <i class="fa-solid fa-trash"></i></button>
         </a></span>
     </div>

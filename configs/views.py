@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
-from todo.settings import env
-
 from urllib import parse
 import uuid
 
@@ -33,6 +31,7 @@ def user_config_general(request):
 
     return render(request, 'configs/settings.html', context)
 
+@login_required
 def initiate_discord_auth(request):
     state = str(uuid.uuid4())
     request.session['oauth2_state'] = state

@@ -68,7 +68,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    width: 100%;
     padding: 20px;
     min-width: 400px;
     max-width: 1000px;
@@ -115,11 +115,6 @@ button:hover {
     align-items: center;
     justify-content: center;
     color: var(--button-color);
-    /*height: 40px;*/
-    /*width: 40px;*/
-    /* box-sizing: border-box; */
-    /* text-decoration: none; */
-    /* font-weight: bold; */
 }
 
 #nav-button:hover {
@@ -160,8 +155,8 @@ button:hover {
 /*                  */
 
 .task-list {
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .task {
@@ -255,14 +250,6 @@ button:hover {
     border-radius: var(--bubble-radius);
 }
 
-.task-form-complete {
-    accent-color: var(--button-color);
-}
-
-.task-form-starred {
-    accent-color: var(--starred-color)
-}
-
 .task-form-due-date {
     height: 40px;
     width: 150px;
@@ -272,6 +259,20 @@ button:hover {
     box-sizing: border-box;
     border: 0px;
     border-radius: var(--bubble-radius);
+}
+
+/*                           */
+/*                           */
+/* SPECIFIC TASK FORM STYLES */
+/*                           */
+/*                           */
+
+.task-form-complete {
+    accent-color: var(--button-color);
+}
+
+.task-form-starred {
+    accent-color: var(--starred-color)
 }
 
 .task-form-description {
@@ -284,11 +285,12 @@ button:hover {
     color: white;
 }
 
-/*                           */
-/*                           */
-/* SPECIFIC TASK FORM STYLES */
-/*                           */
-/*                           */
+.chip {
+    padding: 5px;
+    background-color: #80808080;
+    border-radius: var(--bubble-radius);
+    color: white;
+}
 
 .update-task-form-container {
     display: flex;
@@ -303,6 +305,8 @@ button:hover {
 
 .update-task-row * {
     font-size: 1rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .delete-task-form-container {
